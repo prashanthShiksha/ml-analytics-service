@@ -17,10 +17,10 @@ from azure.storage.blob import BlockBlobService
 from configparser import ConfigParser,ExtendedInterpolation
 from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
 
-parser = argparse.ArgumentParser(description='Please enter last updated date.')
-parser.add_argument('--date', '-d', metavar='date', type=lambda intake_date: datetime.datetime.strptime(intake_date, '%Y-%m-%d'), 
-help='Enter a date with format YYYY-MM-DD.', required=True)
-args = parser.parse_args()
+#parser = argparse.ArgumentParser(description='Please enter last updated date.')
+#parser.add_argument('--date', '-d', metavar='date', type=lambda intake_date: datetime.datetime.strptime(intake_date, '%Y-%m-%d'), 
+#help='Enter a date with format YYYY-MM-DD.', required=True)
+#args = parser.parse_args()
 
 config_path = os.path.split(os.path.dirname(os.path.abspath(__file__)))
 config = ConfigParser(interpolation=ExtendedInterpolation())
@@ -919,8 +919,8 @@ except Exception as e:
   errorLogger.error(e, exc_info=True)
 
 with open('sl_observation.json', 'w') as f:
-  for counter, msg_data in enumerate(obsSubCollec.find({"status":"completed", "createdAt": {"$gte": args.date}})): 
-    print(f"Count: {counter} ---- ID: {msg_data['_id']}")
+  for msg_data in obsSubCollec.find({"solutionExternalId":""}): 
+    #print(f"Count: {counter} ---- ID: {msg_data['_id']}")
     obj_arr = obj_creation(msg_data['_id'])
 
 container_name = config.get("AZURE", "container_name")
