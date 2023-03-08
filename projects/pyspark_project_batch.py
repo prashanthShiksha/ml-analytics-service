@@ -84,7 +84,7 @@ for tasks in last_ingestion:
 
 cur_timestamp = (datetime.datetime.now() - datetime.timedelta(1)).date()
 if cur_timestamp == last_timestamp:
-    bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"ALERT: Duplicate Run. (DISALLOWED)")
+    bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"TERMINATED: (Ingestion) Duplicate Run for Projects.")
     sys.exit()
 
 
