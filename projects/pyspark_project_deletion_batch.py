@@ -45,21 +45,6 @@ datasources = payload["spec"]["dataSchema"]["dataSource"]
 ingestion_specs = [json.dumps(payload)]
 headers = {'Content-Type': 'application/json'}
 
-druid_end_point = config.get("DRUID", "batch_url") + 's'
-get_timestamp = requests.get(druid_end_point, headers=headers, params={'state': 'complete', 
-                                'datasource': payload["spec"]["dataSchema"]["dataSource"]})
-
-last_ingestion = json.loads(get_timestamp.__dict__['_content'].decode('utf8').replace("'", '"'))
-last_timestamp = None
-for tasks in last_ingestion:
-    if tasks['type'] == 'index':
-        last_timestamp = parser.parse((tasks['createdTime'])).date()
-
-cur_timestamp = (datetime.datetime.now() - datetime.timedelta(1)).date()
-if cur_timestamp == last_timestamp:
-    bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"TERMINATED: (Deletion) Duplicate Run for Projects.")
-    sys.exit()
-
 
 bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"*********** STARTED DELETION: {datetime.datetime.now()} ***********\n")
 druid_end_point = config.get("DRUID", "metadata_url") + datasources

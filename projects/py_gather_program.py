@@ -8,6 +8,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import requests
 import datetime
+from dateutil import parser
 from slackclient import SlackClient
 
 config_path = os.path.split(os.path.dirname(os.path.abspath(__file__)))
@@ -26,9 +27,29 @@ with open(config.get('OUTPUT_DIR', 'program_text_file'), mode='w') as file:
         if ids != 'None':
             file.write(f"{ids}\n")
 
-bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"Gathered ProgramIDs: {datetime.datetime.now()}") 
+bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"Gathered ProgramIDs: {datetime.datetime.now()}. Checking previous ingestion...") 
 
+clientProd = MongoClient(config.get('MONGO', 'url'))
+db = clientProd[config.get('MONGO', 'database_name')]
+projectsCollec = db[config.get('MONGO', 'projects_collection')]
 
+headers = {'Content-Type': 'application/json'}
+payload = json.loads(config.get("DRUID","project_injestion_spec"))
+druid_end_point = config.get("DRUID", "batch_url") + 's'
+get_timestamp = requests.get(druid_end_point, headers=headers, params={'state': 'complete', 
+                                'datasource': payload["spec"]["dataSchema"]["dataSource"]})
+
+last_ingestion = json.loads(get_timestamp.__dict__['_content'].decode('utf8').replace("'", '"'))
+last_timestamp = None
+for tasks in last_ingestion:
+    if tasks['type'] == 'index':
+        last_timestamp = parser.parse((tasks['createdTime'])).date()
+
+cur_timestamp = (datetime.datetime.now() - datetime.timedelta(1)).date()
+if cur_timestamp == last_timestamp:
+    with open("./checker.txt", mode='w') as file:
+        file.write("0")
+    bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"TERMINATED: Duplicate Run for Projects.")
 
 
 
