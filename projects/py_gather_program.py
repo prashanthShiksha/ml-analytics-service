@@ -45,11 +45,8 @@ for tasks in last_ingestion:
     if tasks['type'] == 'index':
         last_timestamp = parser.parse((tasks['createdTime'])).date()
 
-cur_timestamp = (datetime.datetime.now() - datetime.timedelta(1)).date()
-if cur_timestamp == last_timestamp:
-    with open("./checker.txt", mode='w') as file:
-        file.write("0")
-    bot.api_call("chat.postMessage",channel=config.get("SLACK","channel"),text=f"TERMINATED: Duplicate Run for Projects.")
+with open("./checker.txt", mode='w') as file:
+    file.write(str(last_timestamp))
 
 
 

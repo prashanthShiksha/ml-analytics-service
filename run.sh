@@ -14,9 +14,10 @@ echo "Gather Program IDs == Started"
 echo "Gather == Completed"
 echo "*************************************"
 
+previous_date=$(date -d "$current_date - 1 day" +"%Y-%m-%d")
 file="./checker.txt"
-read value < "$file"
-if [ "$value" != "0" ]; then
+read last_ingestion_date < "$file"
+if [[ $last_ingestion_date != $previous_date ]]; then
 	# PROJECT: Deletion
 	echo ""
 	echo "$(date)"
