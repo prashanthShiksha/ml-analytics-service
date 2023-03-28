@@ -17,7 +17,7 @@ echo "*************************************"
 run_date=$(date -d "$current_date - 1 day" +"%Y-%m-%d")
 file="./checker.txt"
 read last_ingestion_date < "$file"
-if [[ $last_ingestion_date < $run_date ]]; then
+if [[ $last_ingestion_date != $run_date ]]; then
 	# PROJECT: Deletion
 	echo ""
 	echo "$(date)"
