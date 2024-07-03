@@ -1,6 +1,4 @@
-<div align="center" style="font-size: 25px; font-weight: bold;">
-  Setting up ml-survey-distinctCount-status datasource.
-</div>
+# Setting up ml-survey-distinctCount-status datasource
 
 The survey consumption report on Admin Dashboard is pointing to
 ml-survey-status therefore it showing incorrect values.Hence we are
@@ -29,30 +27,26 @@ new aggregated data source called ml-survey-distinctCount-status
 ### config.ini
 
 1.\[DRUID\]
-
-ml_distinctCnt_survey_status_spec =
-{\"type\":\"index\",\"spec\":{\"ioConfig\":{\"type\":\"index\",\"inputSource\":{\"type\":\"local\",\"baseDir\":\"local
-json file storage path\", \"filter\" :
-\"ml_survey_distinctCount_status.json\"},\"inputFormat\":{\"type\":\"json\"}},\"tuningConfig\":{\"type\":\"index\",\"partitionsSpec\":{\"type\":\"dynamic\"}},\"dataSchema\":{\"dataSource\":\"ml-surveydistinctCount-status\",\"granularitySpec\":{\"type\":\"uniform\",\"queryGranularity\":\"none\",\"rollup\":false,\"segmentGranularity\":\"DAY\"},\"timestampSpec\":{\"column\":\"time_stamp\",\"format\":\"auto\"},\"dimensionsSpec\":{\"dimensions\":\[{\"type\":\"string\",\"name\":\"program_name\"},{\"type\":\"string\",\"name\":\"program_id\"},{\"type\":\"string\",\"name\":\"survey_name\"},{\"type\":\"string\",\"name\":\"survey_id\"},{\"type\":\"string\",\"name\":\"submission_status\"},{\"type\":\"string\",\"name\":\"state_name\"},{\"type\":\"string\",\"name\":\"state_externalId\"},{\"type\":\"string\",\"name\":\"district_name\"},{\"type\":\"string\",\"name\":\"district_externalId\"},{\"type\":\"string\",\"name\":\"block_name\"},{\"type\":\"string\",\"name\":\"block_externalId\"},{\"type\":\"string\",\"name\":\"organisation_name\"},{\"type\":\"string\",\"name\":\"organisation_id\"},{\"type\":\"string\",\"name\":\"private_program\"},{\"type\":\"string\",\"name\":\"parent_channel\"},{\"type\":\"long\",\"name\":\"unique_users\"},{\"type\":\"long\",\"name\":\"unique_submissions\"},{\"type\":\"string\",\"name\":\"time_stamp\"}\]},\"metricsSpec\":\[\]}}}
+ml_distinctCnt_survey_status_spec : 
+```html
+{"type":"index","spec":{"ioConfig":{"type":"index","inputSource":{"type":"local","baseDir":["local json file storage path"],"filter":"ml_survey_distinctCount_status.json"},"inputFormat":{"type":"json"}},"tuningConfig":{"type":"index","partitionsSpec":{"type":"dynamic"}},"dataSchema":{"dataSource":"ml-surveydistinctCount-status","granularitySpec":{"type":"uniform","queryGranularity":"none","rollup":false,"segmentGranularity":"DAY"},"timestampSpec":{"column":"time_stamp","format":"auto"},"dimensionsSpec":{"dimensions":[{"type":"string","name":"program_name"},{"type":"string","name":"program_id"},{"type":"string","name":"survey_name"},{"type":"string","name":"survey_id"},{"type":"string","name":"submission_status"},{"type":"string","name":"state_name"},{"type":"string","name":"state_externalId"},{"type":"string","name":"district_name"},{"type":"string","name":"district_externalId"},{"type":"string","name":"block_name"},{"type":"string","name":"block_externalId"},{"type":"string","name":"organisation_name"},{"type":"string","name":"organisation_id"},{"type":"string","name":"private_program"},{"type":"string","name":"parent_channel"},{"type":"long","name":"unique_users"},{"type":"long","name":"unique_submissions"},{"type":"string","name":"time_stamp"}]},"metricsSpec":[]}}}
+```
+Note : change the path (spec.inConfig.inputSource.baseDir : "local json file storage path")  
 
 2.\[OUTPUT_DIR\]
-
+```html
 survey_distinctCount_status = "local json file storage path"
-
+```
 3.\[COMMON\]
-
+```html
 survey_distinctCount_blob_path = "cloud json file storage path"
-
+```
 4.\[LOGS\]
-
+```html
 survey_streaming_success_error : "logs storage path"
-
+```
 ### Backend Json
 
-1\.ml_no_of_surveys_in_started_status_currently_sl.json:
+1\.[ml no of surveys in started status currently sl.json](https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_in_started_status_currently_sl.json)
 
-https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_in_started_status_currently_sl.json
-
-2\.ml_no_of_surveys_submitted_till_date_sl.json :
-
-https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_submitted_till_date_sl.json
+2\.[ml no of surveys submitted till date sl.json](https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_submitted_till_date_sl.json)
