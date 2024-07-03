@@ -18,22 +18,22 @@ To proceed with the deployment process, follow the steps below:
     7. Once the job is completed, the services will be deployed on the respective environment
 
 ### config changes
-Add new templates in [config.j2] (https://github.com/project-sunbird/sunbird-devops/blob/release-5.1.0/ansible/roles/ml-analytics-service/templates/config.j2)
+Add new templates in config.j2 please refer this : https://github.com/project-sunbird/sunbird-devops/blob/release-5.1.0/ansible/roles/ml-analytics-service/templates/config.j2
 
-1.\[DRUID\] 
-
+```html
+[DRUID] 
 ml_distinctCnt_survey_status_spec :{{ml_analytics_distinctCnt_survey_status_batch_ingestion_spec}} 
 
-2.\[OUTPUT_DIR\]: 
+[OUTPUT_DIR]
 survey_distinctCount_status = {{ml_analytics_survey_distinctCount_status_filepath}}
 
-3.\[COMMON\]: 
+[COMMON]
 survey_distinctCount_blob_path = {{ ml_analytics_survey_distinctCount_blob_path }}
 
-4.\[LOGS\]:
+[LOGS]
 survey_streaming_success_error = {{ ml_analytics_survey_streaming_success_log_folder_path }}
-
-Add configs in the [main.yml](https://github.com/project-sunbird/sunbird-devops/blob/release-5.1.0/ansible/roles/ml-analytics-service/defaults/main.yml) 
+```
+Add configs in main.yml please refer this : https://github.com/project-sunbird/sunbird-devops/blob/release-5.1.0/ansible/roles/ml-analytics-service/defaults/main.yml
 
 1.ml_analytics_distinctCnt_survey_status_batch_ingestion_spec :
 ```html
