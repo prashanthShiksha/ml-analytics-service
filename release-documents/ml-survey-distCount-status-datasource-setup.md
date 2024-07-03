@@ -1,9 +1,9 @@
 # Release Note 5.1.0 ML Analytics Service
 
 The survey consumption report on Admin Dashboard is pointing to raw datasource 
-ml-survey-status therefore it showing incorrect values.Hence we are
-created new script pyspark_sur_distinct_count_status.py it will create
-new aggregated data source called ml-survey-distinctCount-status
+`ml-survey-status` therefore it showing incorrect values.Hence we are
+created new script `pyspark_sur_distinct_count_status.py` it will create
+new aggregated data source called `ml-survey-distinctCount-status`
 .
 
 ## Deploy ml-analytics-service
@@ -48,7 +48,7 @@ Note : change the values for keys such as (spec.inConfig.inputSource.baseDir : "
 - ml_analytics_survey_streaming_success_log_folder_path : "logs storage path"
 
 ### Backend Json
-Update the backend json using this API /api/data/v1/report/jobs/ 
+Update the backend json using this API `/api/data/v1/report/jobs/`
 
 1\.[ml no of surveys in started status currently sl.json](https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_in_started_status_currently_sl.json)
 
