@@ -53,4 +53,5 @@ Update the backend json using this API /api/data/v1/report/jobs/
 1\.[ml no of surveys in started status currently sl.json](https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_in_started_status_currently_sl.json)
 
 2\.[ml no of surveys submitted till date sl.json](https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_submitted_till_date_sl.json)
+
 Note. change the values for keys such as createdBy(ex.b5bf1586-1181-4c14-9e7a-3cbc6099b327) , container(ex.analytics) , postcontainer(ex.analytics) , store(ex.azure) . 
