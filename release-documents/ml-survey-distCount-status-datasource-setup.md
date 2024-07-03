@@ -48,7 +48,7 @@ Note : change the path (spec.inConfig.inputSource.baseDir : "local json file sto
 - ml_analytics_survey_streaming_success_log_folder_path : "logs storage path"
 
 ### Backend Json
-Updating backend json using this API /api/data/v1/report/jobs/ 
+Update backend json using this API /api/data/v1/report/jobs/ 
 
 1\.[ml no of surveys in started status currently sl.json](https://github.com/shikshalokam/ml-analytics-service/blob/release-6.0.0/migrations/releases/6.0.0/config/backend/create/ml_no_of_surveys_in_started_status_currently_sl.json)
 
