@@ -12,7 +12,7 @@ To retrieve the latest release tag for version 5.1.0, please visit the following
 To proceed with the deployment process, follow the steps below:
 
     1. Log in to Jenkins.
-    2. In ml-analytics-service we dont have build, we have deployment only.
+    2. In ml-analytics-service, we don't have a build process; we only have deployment.
     3. go to Dashboard -> Deploy -> staging -> managed-learn -> ml-analytics-service. OR for dev go to Dashboard -> Deploy -> dev -> managed-learn -> ml-analytics-service.
     6. Click on "Build with parameters" and provide the latest release tag in the field labeled "ml_analytics_version" and release branch in the "branch_or_tag".Initiate the deployment process.
     7. Once the job is completed, the services will be deployed on the respective environment.
