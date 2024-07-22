@@ -31,10 +31,11 @@ config.read(config_path[0] + "/config.ini")
 root_path = config_path[0]
 sys.path.append(root_path)
 
+sys.path.append(config.get("COMMON","cloud_module_path"))
 from cloud_storage.cloud import MultiCloud
 cloud_init = MultiCloud()
 
-sys.path.append(config.get("COMMON","cloud_module_path"))
+
 
 # date formating
 current_date = datetime.date.today()
