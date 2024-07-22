@@ -32,7 +32,7 @@ root_path = config_path[0]
 sys.path.append(root_path)
 
 sys.path.append(config.get("COMMON","cloud_module_path"))
-from cloud_storage.cloud import MultiCloud
+from cloud import MultiCloud
 cloud_init = MultiCloud()
 
 
