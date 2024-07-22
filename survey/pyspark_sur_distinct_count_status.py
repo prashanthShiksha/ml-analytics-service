@@ -35,8 +35,6 @@ sys.path.append(config.get("COMMON","cloud_module_path"))
 from cloud import MultiCloud
 cloud_init = MultiCloud()
 
-
-
 # date formating
 current_date = datetime.date.today()
 formatted_current_date = current_date.strftime("%d-%B-%Y")
